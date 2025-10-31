@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarikaze Created Songs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background: #000;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Hintergrund mit dem Vinyl-Bild */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/placeholder.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        /* Dunkler Overlay für bessere Lesbarkeit */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.7) 0%, rgba(255, 69, 0, 0.6) 50%, rgba(255, 140, 0, 0.7) 100%);
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 3.5em;
+            text-shadow: 0 0 20px rgba(255, 69, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.3em;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+
+        .portfolio-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.5);
+            margin-top: 10px;
+        }
+
+        .portfolio-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(255, 69, 0, 0.8);
+            background: linear-gradient(135deg, #ff6347 0%, #ffa500 100%);
+        }
+
+        .songs-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .song-card {
+            background: rgba(20, 20, 20, 0.85);
+            border: 2px solid rgba(255, 69, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease forwards;
+            opacity: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .song-card:nth-child(1) { animation-delay: 0.1s; }
+        .song-card:nth-child(2) { animation-delay: 0.2s; }
+        .song-card:nth-child(3) { animation-delay: 0.3s; }
+        .song-card:nth-child(4) { animation-delay: 0.4s; }
+        .song-card:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .song-card:hover {
+            transform: translateX(10px);
+            border-color: rgba(255, 69, 0, 0.8);
+            box-shadow: 0 15px 40px rgba(255, 69, 0, 0.4);
+            background: rgba(30, 30, 30, 0.9);
+        }
+
+        .song-info-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .song-number {
+            font-size: 1.5em;
+            color: #ff4500;
+            font-weight: bold;
+            min-width: 30px;
+        }
+
+        .song-cover {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+        }
+
+        .song-details {
+            flex: 1;
+        }
+
+        .song-title {
+            font-size: 1.3em;
+            color: #fff;
+            margin-bottom: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .song-card:hover .song-title {
+            transform: translateY(-3px);
+            color: #ff8c00;
+            text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+        }
+
+        .song-artist {
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .song-info-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .song-duration {
+            color: #999;
+            font-size: 1em;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4);
+            cursor: pointer;
+            border: none;
+            font-size: 0.95em;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.7);
+            background: linear-gradient(135deg, #ff6347 0%, #ffa500 100%);
+        }
+
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .song-card {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .song-info-left {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .song-info-right {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 SARIKAZE</h1>
+            <p class="subtitle">Created Songs</p>
+            <a href="https://s4rix.zilan.dev/" class="portfolio-link" target="_blank">
+                🌐 Visit My Portfolio
+            </a>
+        </header>
+
+        <div class="songs-grid">
+            <div class="song-card">
+                <div class="song-info-left">
+                    <div class="song-number">1</div>
+                    <div class="song-cover">🎸</div>
+                    <div class="song-details">
+                        <div class="song-title">Rise of Zilan</div>
+                        <div class="song-artist">sarikaze</div>
+                    </div>
+                </div>
+                <div class="song-info-right">
+                    <div class="song-duration">2:54</div>
+                    <button class="download-btn" onclick="downloadSong('rise-of-zilan.mp3', 'Rise of Zilan')">
+                        ⬇️ Download
+                    </button>
+                </div>
+            </div>
+
+            <div class="song-card">
+                <div class="song-info-left">
+                    <div class="song-number">2</div>
+                    <div class="song-cover">🔥</div>
+                    <div class="song-details">
+                        <div class="song-title">Silence After Fire</div>
+                        <div class="song-artist">sarikaze</div>
+                    </div>
+                </div>
+                <div class="song-info-right">
+                    <div class="song-duration">2:10</div>
+                    <button class="download-btn" onclick="downloadSong('silence-after-fire.mp3', 'Silence After Fire')">
+                        ⬇️ Download
+                    </button>
+                </div>
+            </div>
+
+            <div class="song-card">
+                <div class="song-info-left">
+                    <div class="song-number">3</div>
+                    <div class="song-cover">☁️</div>
+                    <div class="song-details">
+                        <div class="song-title">Burn the Sky</div>
+                        <div class="song-artist">sarikaze</div>
+                    </div>
+                </div>
+                <div class="song-info-right">
+                    <div class="song-duration">2:45</div>
+                    <button class="download-btn" onclick="downloadSong('burn-the-sky.mp3', 'Burn the Sky')">
+                        ⬇️ Download
+                    </button>
+                </div>
+            </div>
+
+            <div class="song-card">
+                <div class="song-info-left">
+                    <div class="song-number">4</div>
+                    <div class="song-cover">🌍</div>
+                    <div class="song-details">
+                        <div class="song-title">Calling Me Home - Another World Awaits- Sonauto</div>
+                        <div class="song-artist">sarikaze</div>
+                    </div>
+                </div>
+                <div class="song-info-right">
+                    <div class="song-duration">2:17</div>
+                    <button class="download-btn" onclick="downloadSong('calling-me-home.mp3', 'Calling Me Home')">
+                        ⬇️ Download
+                    </button>
+                </div>
+            </div>
+
+            <div class="song-card">
+                <div class="song-info-left">
+                    <div class="song-number">5</div>
+                    <div class="song-cover">⚡</div>
+                    <div class="song-details">
+                        <div class="song-title">Rust to Ruin - Sonauto</div>
+                        <div class="song-artist">sarikaze</div>
+                    </div>
+                </div>
+                <div class="song-info-right">
+                    <div class="song-duration">2:24</div>
+                    <button class="download-btn" onclick="downloadSong('rust-to-ruin.mp3', 'Rust to Ruin')">
+                        ⬇️ Download
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 Sarikaze • All Rights Reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        function downloadSong(filename, songName) {
+            // WICHTIG: Hier musst du später deine echten MP3-Dateien verlinken!
+            // Beispiel: const url = 'pfad/zu/deinen/songs/' + filename;
+            
+            // Für Demo-Zwecke zeigen wir eine Nachricht
+            alert('Download starting: ' + songName + '\n\nIMPORTANT: You need to upload your real song files and adjust the URLs in the code!');
+            
+            // So würde der echte Download funktionieren:
+            // const link = document.createElement('a');
+            // link.href = url;
+            // link.download = filename;
+            // document.body.appendChild(link);
+            // link.click();
+            // document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
