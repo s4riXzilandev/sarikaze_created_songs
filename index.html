@@ -27,7 +27,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://wallpapersafari.com/music-wallpaper-for-pc/');
+            background-image: url('https://s4rixzilandev.github.io/sarikaze_created_songs/musicwallpaper.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -284,7 +284,7 @@
                 </div>
                 <div class="song-info-right">
                     <div class="song-duration">2:54</div>
-                    <button class="download-btn" onclick="downloadSong('Rise of Zilan.mp3', 'Rise of Zilan')">
+                    <button class="download-btn" onclick="downloadSong('rise-of-zilan.mp3', 'Rise of Zilan')">
                         ⬇️ Download
                     </button>
                 </div>
@@ -301,7 +301,7 @@
                 </div>
                 <div class="song-info-right">
                     <div class="song-duration">2:10</div>
-                    <button class="download-btn" onclick="downloadSong('Silence After Fire.mp3', 'Silence After Fire')">
+                    <button class="download-btn" onclick="downloadSong('silence-after-fire.mp3', 'Silence After Fire')">
                         ⬇️ Download
                     </button>
                 </div>
@@ -318,7 +318,7 @@
                 </div>
                 <div class="song-info-right">
                     <div class="song-duration">2:45</div>
-                    <button class="download-btn" onclick="downloadSong('Burn the Sky.mp3', 'Burn the Sky')">
+                    <button class="download-btn" onclick="downloadSong('burn-the-sky.mp3', 'Burn the Sky')">
                         ⬇️ Download
                     </button>
                 </div>
@@ -329,13 +329,13 @@
                     <div class="song-number">4</div>
                     <div class="song-cover">🌍</div>
                     <div class="song-details">
-                        <div class="song-title">Calling Me Home - Another World Awaits</div>
+                        <div class="song-title">Calling Me Home - Another World Awaits- Sonauto</div>
                         <div class="song-artist">sarikaze</div>
                     </div>
                 </div>
                 <div class="song-info-right">
                     <div class="song-duration">2:17</div>
-                    <button class="download-btn" onclick="downloadSong('Calling Me Home - Another World Awaits.mp3', 'Calling Me Home')">
+                    <button class="download-btn" onclick="downloadSong('calling-me-home.mp3', 'Calling Me Home')">
                         ⬇️ Download
                     </button>
                 </div>
@@ -346,13 +346,13 @@
                     <div class="song-number">5</div>
                     <div class="song-cover">⚡</div>
                     <div class="song-details">
-                        <div class="song-title">Rust to Ruin</div>
+                        <div class="song-title">Rust to Ruin - Sonauto</div>
                         <div class="song-artist">sarikaze</div>
                     </div>
                 </div>
                 <div class="song-info-right">
                     <div class="song-duration">2:24</div>
-                    <button class="download-btn" onclick="downloadSong('Rust to Ruin.mp3', 'Rust to Ruin')">
+                    <button class="download-btn" onclick="downloadSong('rust-to-ruin.mp3', 'Rust to Ruin')">
                         ⬇️ Download
                     </button>
                 </div>
@@ -366,19 +366,16 @@
 
     <script>
         function downloadSong(filename, songName) {
-            // WICHTIG: Hier musst du später deine echten MP3-Dateien verlinken!
-            // Beispiel: const url = 'pfad/zu/deinen/songs/' + filename;
+            // GitHub Pages URL - Songs sind direkt im Hauptverzeichnis
+            const url = 'https://s4rixzilandev.github.io/sarikaze_created_songs/' + filename;
             
-            // Für Demo-Zwecke zeigen wir eine Nachricht
-            alert('Download starting: ' + songName + '\n\nIMPORTANT: You need to upload your real song files and adjust the URLs in the code!');
-            
-            // So würde der echte Download funktionieren:
-            // const link = document.createElement('a');
-            // link.href = url;
-            // link.download = filename;
-            // document.body.appendChild(link);
-            // link.click();
-            // document.body.removeChild(link);
+            // Download starten
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
